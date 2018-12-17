@@ -1,11 +1,15 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
+// Import connect to call the action creators
+import { connect } from 'react-redux';
 import { CardSection } from './common';
+// Import all available action creators
+import * as actions from '../actions'; 
 
 class ListItem extends Component {
     render() {
         const { titleStyle } = styles;
-        
+
         return (
             <CardSection>
                 <Text>{this.props.library.title}</Text>
@@ -21,4 +25,5 @@ const styles = {
     }
 }
 
-export default ListItem;
+// Take action creators and pass to this component as props
+export default connect(null, actions)(ListItem);

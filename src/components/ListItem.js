@@ -7,6 +7,17 @@ import { CardSection } from './common';
 import * as actions from '../actions'; 
 
 class ListItem extends Component {
+    // Helper method
+    renderDescription(){
+        const { library, selectedLibraryId } = this.props;
+
+        if(library.id === selectedLibraryId){
+            return (
+                <Text>{library.description}</Text>
+            );
+        }
+    }
+
     render() {
         // Destructuring
         const { titleStyle } = styles;
@@ -19,6 +30,7 @@ class ListItem extends Component {
                     <CardSection>
                         <Text style={titleStyle}>{title}</Text>
                     </CardSection>
+                    {this.renderDescription()}
                 </View>
             </TouchableWithoutFeedback>
         );
@@ -32,5 +44,10 @@ const styles = {
     }
 }
 
+// Add function to consume piece of app level state; Take selected library id and import it into this component
+const mapStateToProps = state => {
+    return { selectedLibraryId: state.selectedLibraryId };
+}
+
 // Take action creators and pass to this component as props
-export default connect(null, actions)(ListItem);
+export default connect(mapStateToProps, actions)(ListItem);

@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { Text, TouchableWithoutFeedback, View } from 'react-native';
 // Import connect to call the action creators
 import { connect } from 'react-redux';
 import { CardSection } from './common';
@@ -8,12 +8,19 @@ import * as actions from '../actions';
 
 class ListItem extends Component {
     render() {
+        // Destructuring
         const { titleStyle } = styles;
+        const { id, title } = this.props.library;
 
+        // Call action creator and pass library id on ListItem click
         return (
-            <CardSection>
-                <Text>{this.props.library.title}</Text>
-            </CardSection>
+            <TouchableWithoutFeedback onPress={() => this.props.selectLibrary(id)}>
+                <View>
+                    <CardSection>
+                        <Text style={titleStyle}>{title}</Text>
+                    </CardSection>
+                </View>
+            </TouchableWithoutFeedback>
         );
     }
 }

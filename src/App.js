@@ -12,7 +12,7 @@ const App = () => {
         /* Provider tag is communication with React;
         Create store with reducers and pass to Provider tag */
         <Provider store={createStore(reducers)}>
-            <View>
+            <View style={{ flex: 1 }}>
                 <Header headerText="Tech Stack" />
             
                 <LibraryList />

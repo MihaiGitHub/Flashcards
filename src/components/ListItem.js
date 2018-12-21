@@ -9,9 +9,10 @@ import * as actions from '../actions';
 class ListItem extends Component {
     // Helper method
     renderDescription(){
-        const { library, selectedLibraryId } = this.props;
+        const { library, expanded } = this.props;
 
-        if(library.id === selectedLibraryId){
+        // If this library is selected than show description
+        if(expanded){
             return (
                 <Text>{library.description}</Text>
             );
@@ -45,8 +46,12 @@ const styles = {
 }
 
 // Add function to consume piece of app level state; Take selected library id and import it into this component
-const mapStateToProps = state => {
-    return { selectedLibraryId: state.selectedLibraryId };
+const mapStateToProps = (state, ownProps) => { // ownProps is exactly equal to this.props inside component
+    // expanded = true or false
+    const expanded = state.selectedLibraryId === ownProps.library.id;
+
+    // Component can just look at expanded flag to show/hide description
+    return { expanded };
 }
 
 // Take action creators and pass to this component as props

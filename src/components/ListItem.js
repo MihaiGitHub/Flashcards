@@ -53,6 +53,8 @@ const styles = {
     }
 }
 
+// Pluck properties from state object and inject into component
+// Whenever app state changes mapStateToProps will rerun and pass in new set of props to this component and rerender this component
 // Add function to consume piece of app level state; Take selected library id and import it into this component
 const mapStateToProps = (state, ownProps) => { // ownProps is exactly equal to this.props inside component
     // expanded = true or false

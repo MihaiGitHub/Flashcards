@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Text, TouchableWithoutFeedback, View } from 'react-native';
+import { Text, TouchableWithoutFeedback, View, LayoutAnimation } from 'react-native';
 // Import connect to call the action creators
 import { connect } from 'react-redux';
 import { CardSection } from './common';
@@ -7,6 +7,12 @@ import { CardSection } from './common';
 import * as actions from '../actions'; 
 
 class ListItem extends Component {
+    // Called whenever the component is about to be rerendered
+    componentWillUpdate() {
+        // All updates on device will be animated
+        LayoutAnimation.spring();
+    }
+
     // Helper method
     renderDescription(){
         const { library, expanded } = this.props;
@@ -14,7 +20,9 @@ class ListItem extends Component {
         // If this library is selected than show description
         if(expanded){
             return (
-                <Text>{library.description}</Text>
+                <CardSection>
+                    <Text style={{ flex: 1 }}>{library.description}</Text>
+                </CardSection>
             );
         }
     }
